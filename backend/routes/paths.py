@@ -38,6 +38,25 @@ async def grad_predict(req: GradRequest, response: Response):
     prediction = grad.predict(new_df)
     if(prediction[0] > 100):
         prediction[0] = 0.992
+        # pred = "Selamat! Anda diterima di program IISMA"
+
+        # return {"message": "Selamat! Anda diterima di program IISMA"}
     elif(prediction[0] < 0):
         prediction[0] = 0.0008
-    return {"name": req.name, "pred": prediction[0]}
+        # pred = "Maaf, Anda belum berhasil mengikuti program IISMA. Coba lagi tahun depan!"
+
+        # return {"message": "Maaf, Anda belum berhasil mengikuti program IISMA. Coba lagi tahun depan!"}
+    return {"name": req.name, "pred": "Kemungkinanmu diterima dalam program IISMA adalah sebesar {}".format(prediction[0])}
+
+    # return {"name": req.name, "pred": {}.format(pred)}
+
+    # if(prediction[0] > 100):
+    #     return {"pred": "Selamat! Anda diterima di program IISMA"}
+    # elif(prediction[0] < 0):
+    #     return {"pred": "Maaf, Anda belum berhasil mengikuti program IISMA. Coba lagi tahun depan!"}
+
+    # if (prediction == 0):
+    #     res = 'Fake'
+    # elif (prediction == 1):
+    #     res = 'Real'
+    # return {'This News is {}'.format(res)}
